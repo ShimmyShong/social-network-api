@@ -8,11 +8,18 @@ const reactionSchema = new Schema(
         },
         reactionBody: {
             type: String,
-            default: Date.now(),
+            required: true,
+            max: 280,
         },
         username: {
             type: String,
             required: true,
         },
+        createdAt: {
+            type: Date,
+            default: Date.now(), // TODO: format this later
+        }
     }
 )
+
+module.exports = reactionSchema;
