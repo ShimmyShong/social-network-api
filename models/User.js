@@ -1,5 +1,5 @@
 const { Schema, model, default: mongoose } = require('mongoose');
-const { thoughtSchema } = require('./Thought');
+// const { thoughtSchema } = require('./Thought');
 
 const emailValidation = (email) => {
     // this is the RFC 5322 Official Standard general email regular expression
@@ -13,7 +13,7 @@ const userSchema = new Schema(
             type: String,
             unique: true,
             required: true,
-            trimmed: true,
+            trim: true,
         },
         email: {
             type: String,
@@ -25,11 +25,11 @@ const userSchema = new Schema(
             },
         },
         thoughts: [{
-            type: mongoose.Schema.Types.ObjectId,
+            type: Schema.Types.ObjectId,
             ref: 'thought'
         }],
         friends: [{
-            type: mongoose.Schema.Types.ObjectId,
+            type: Schema.Types.ObjectId,
             ref: 'user'
         }]
     }
