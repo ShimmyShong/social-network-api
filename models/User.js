@@ -1,5 +1,5 @@
-const { Schema, model, default: mongoose } = require('mongoose');
-// const { thoughtSchema } = require('./Thought');
+const { Schema, model } = require('mongoose');
+const { thoughtSchema } = require('./Thought')
 
 const emailValidation = (email) => {
     // this is the RFC 5322 Official Standard general email regular expression
