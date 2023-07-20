@@ -18,8 +18,19 @@ const thoughtSchema = new Schema(
             required: true,
         },
         reactions: [reactionSchema]
+    },
+    {
+        toJSON: {
+            virtuals: true
+        },
+        id: false
     }
 )
+
+thoughtSchema.virtual('formattedDate').get(function () {
+    const formattedDate = `${this.createdAt.toLocaleDateString()} at ${this.createdAt.toLocaleTimeString()}`
+    return formattedDate;
+})
 
 const Thought = model('thought', thoughtSchema);
 

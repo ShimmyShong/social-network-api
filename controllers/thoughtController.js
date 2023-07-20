@@ -1,4 +1,4 @@
-const { Thought } = require('../models');
+const { Thought, User, reactionSchema } = require('../models');
 
 module.exports = {
     async getThoughts(req, res) {
@@ -26,6 +26,16 @@ module.exports = {
     async createThought(req, res) {
         try {
             const thoughtData = await Thought.create(req.body);
+            const userData = await User.findOneAndUpdate(
+                { _id: req.body.userId },
+                { $addToSet: { thoughts: thoughtData._id } },
+                { new: true }
+            )
+
+            if (!userData) {
+                return res.status(404).json({ message: "No user with that username found!" })
+            }
+
             res.json(thoughtData);
         } catch (err) {
             console.log(err);
@@ -60,6 +70,41 @@ module.exports = {
             }
 
             res.json({ message: "Thought has been deleted!" })
+        } catch (err) {
+            console.log(err)
+            res.status(500).json(err)
+        }
+    },
+    async createReaction(req, res) {
+        try {
+            const thoughtData = await Thought.findOneAndUpdate(
+                { _id: req.params.thoughtId },
+                { $push: { reactions: req.body } },
+                { new: true }
+            )
+
+            if (!thoughtData) {
+                return res.status(404).json({ message: "No thought with this ID!" })
+            }
+
+            res.json(thoughtData)
+        } catch (err) {
+            console.log(err)
+            res.status(500).json(err)
+        }
+    },
+    async deleteReaction(req, res) {
+        try {
+            const thoughtData = await Thought.findOneAndUpdate(
+                { _id: req.params.thoughtId },
+                { $pull: { reactions: { _id: req.params.reactionId } } }
+            )
+
+            if (!thoughtData) {
+                return res.status(404).json({ message: "No thought with this ID!" })
+            }
+
+            res.json({ message: "Reaction deleted!" })
         } catch (err) {
             console.log(err)
             res.status(500).json(err)
