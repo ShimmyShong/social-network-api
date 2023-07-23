@@ -17,7 +17,7 @@ const reactionSchema = new Schema(
         },
         createdAt: {
             type: Date,
-            default: Date.now(), // TODO: format this later
+            default: Date.now(),
         }
     },
     {
