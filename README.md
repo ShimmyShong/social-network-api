@@ -1,5 +1,9 @@
 # Social Network API [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+
+https://github.com/ShimmyShong/social-network-api/assets/123122824/a29bacdb-9fbf-47d4-a79c-c01ccbcf14da
+
+
 ## Description
 This is an API for a social network web application where people can share thoughts, react to other thoughts, and create a friend list. It is using MongoDB and the Mongoose ODM. I learned a lot about using MongoDB instead of SQL with this project, and even though it was hard to make the switch, I overall preferred it over SQL in the end!
 ## Table of Contents
